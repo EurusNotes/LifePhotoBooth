@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ASCII Heart Booth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              milk: '#fff5fa',
+              pink: {
+                450: '#ff69b4', // Hot pink
+                550: '#ff1493', // Deep pink
+              }
+            },
+            fontFamily: {
+              mono: ['Courier New', 'Courier', 'monospace'],
+            },
+            animation: {
+              'blink': 'blink 1s step-end infinite',
+              'scroll-bg': 'scroll-bg 20s linear infinite',
+            },
+            keyframes: {
+              blink: {
+                '0%, 100%': { opacity: '1' },
+                '50%': { opacity: '0' },
+              },
+              'scroll-bg': {
+                '0%': { transform: 'translateY(0)' },
+                '100%': { transform: 'translateY(-100%)' },
+              }
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+      body {
+        background-color: #fff5fa;
+        color: #ff69b4;
+        font-family: 'Courier New', Courier, monospace;
+        /* Removed overflow: hidden to allow scrolling */
+      }
+      /* Custom scrollbar for webkit */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #fff5fa;
+        border-left: 1px solid #ff69b4;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #ff69b4;
+        border: 1px solid #fff5fa;
+      }
+    </style>
+
+<link rel="stylesheet" href="/index.css">
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1",
+    "vite": "https://aistudiocdn.com/vite@^7.2.4"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/LifePhotoBooth/assets/index-DwCgnYr3.js"></script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
