@@ -55,17 +55,17 @@ export const AnimatedBackground: React.FC = () => {
   // Generate random hearts and stars
   const chars = "♥★✿NO●°";
   const rows = Array.from({ length: 50 }).map((_, i) => {
-    return Array.from({ length: 40 }).map(() => 
+    return Array.from({ length: 40 }).map(() =>
       Math.random() > 0.95 ? chars[Math.floor(Math.random() * chars.length)] : " "
     ).join("");
   });
 
   return (
     <div className="fixed inset-0 pointer-events-none -z-10 opacity-10 overflow-hidden flex flex-col select-none">
-       <div className="animate-scroll-bg whitespace-pre font-mono text-pink-600 leading-none">
-          {rows.map((row, i) => <div key={i}>{row}</div>)}
-          {rows.map((row, i) => <div key={`dup-${i}`}>{row}</div>)}
-       </div>
+      <div className="animate-scroll-bg whitespace-pre font-mono text-pink-600 leading-none">
+        {rows.map((row, i) => <div key={i}>{row}</div>)}
+        {rows.map((row, i) => <div key={`dup-${i}`}>{row}</div>)}
+      </div>
     </div>
   );
 };
@@ -78,8 +78,8 @@ export const TypewriterEffect: React.FC<{ text: string; delay?: number }> = ({ t
     setDisplayText('');
     const timer = setInterval(() => {
       if (i < text.length) {
-        setDisplayText((prev) => prev + text.charAt(i));
         i++;
+        setDisplayText(text.slice(0, i));
       } else {
         clearInterval(timer);
       }
