@@ -1,0 +1,7 @@
+{
+  "name": "ASCII Heart Booth",
+  "description": "A cute, pink-themed ASCII art style photo booth that takes 4 shots.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
