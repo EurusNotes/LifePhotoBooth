@@ -28,7 +28,7 @@ const FILTERS: Record<FilterType, { filter: string; label: string }> = {
 export const PhotoStrip: React.FC<PhotoStripProps> = ({ photos, onRestart }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
-  
+
   // Customization State
   const [layout, setLayout] = useState<LayoutType>('strip');
   const [filter, setFilter] = useState<FilterType>('normal');
@@ -65,7 +65,7 @@ export const PhotoStrip: React.FC<PhotoStripProps> = ({ photos, onRestart }) => 
       // 1. Calculate Dimensions based on Layout
       let canvasW = 0;
       let canvasH = 0;
-      
+
       if (layout === 'strip') {
         canvasW = PADDING * 2 + PHOTO_WIDTH;
         canvasH = PADDING * 2 + HEADER_HEIGHT + FOOTER_HEIGHT + (4 * PHOTO_HEIGHT) + (3 * GAP);
@@ -96,14 +96,14 @@ export const PhotoStrip: React.FC<PhotoStripProps> = ({ photos, onRestart }) => 
       ctx.font = 'bold 36px "Courier New", monospace';
       ctx.textAlign = 'center';
       ctx.fillText("LIFE 4 CUTS", canvasW / 2, PADDING + 50);
-      
+
       ctx.fillStyle = currentTheme.accent;
       ctx.font = '24px "Courier New", monospace';
       ctx.fillText("(｡♥‿♥｡)", canvasW / 2, PADDING + 85);
 
       // 5. Draw Photos
       const startY = PADDING + HEADER_HEIGHT;
-      
+
       images.forEach((img, index) => {
         let x = 0;
         let y = 0;
@@ -172,115 +172,115 @@ export const PhotoStrip: React.FC<PhotoStripProps> = ({ photos, onRestart }) => 
           Mobile: Stacked
       */}
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] xl:grid-cols-[1fr_400px] gap-8 w-full items-start relative">
-        
+
         {/* Left Column: Preview Area */}
         {/* Min-height ensures container doesn't collapse while rendering */}
         <div className="w-full flex justify-center items-start min-h-[60vh]">
-            <div className="relative bg-white shadow-2xl border-4 border-pink-100 p-2 md:p-4 max-w-full rounded-sm inline-block">
-                 {/* Canvas scales to fit but preserves aspect ratio. max-h prevents it from being too tall on screen */}
-                <canvas 
-                    ref={canvasRef} 
-                    className="max-w-full max-h-[75vh] w-auto h-auto object-contain mx-auto shadow-sm block"
-                    style={{ imageRendering: 'high-quality' }}
-                />
-                <div className="absolute bottom-2 right-2 bg-white/80 px-2 py-1 text-xs font-mono text-pink-400 pointer-events-none border border-pink-100">
-                    PREVIEW
-                </div>
+          <div className="relative bg-white shadow-2xl border-4 border-pink-100 p-2 md:p-4 max-w-full rounded-sm inline-block">
+            {/* Canvas scales to fit but preserves aspect ratio. max-h prevents it from being too tall on screen */}
+            <canvas
+              ref={canvasRef}
+              className="max-w-full max-h-[75vh] w-auto h-auto object-contain mx-auto shadow-sm block"
+              style={{ imageRendering: 'auto' }}
+            />
+            <div className="absolute bottom-2 right-2 bg-white/80 px-2 py-1 text-xs font-mono text-pink-400 pointer-events-none border border-pink-100">
+              PREVIEW
             </div>
+          </div>
         </div>
 
         {/* Right Column: Customization Controls */}
         {/* sticky ensures controls stay visible when scrolling down a long photo strip */}
         <div className="w-full lg:sticky lg:top-8 h-fit">
-            <AsciiBorder title="CUSTOMIZE" className="bg-white/90 backdrop-blur w-full shadow-sm">
-                
-                {/* Layouts */}
-                <div className="mb-6">
-                    <h3 className="font-mono text-sm font-bold text-pink-600 mb-3 flex items-center gap-2">
-                        <span>[1]</span> LAYOUT
-                    </h3>
-                    <div className="grid grid-cols-3 gap-2">
-                        {(['strip', 'grid', 'film'] as LayoutType[]).map((l) => (
-                            <button
-                                key={l}
-                                onClick={() => setLayout(l)}
-                                className={`
-                                    py-2 px-1 text-xs md:text-sm font-bold border-2 transition-all uppercase
-                                    ${layout === l 
-                                        ? 'bg-pink-500 text-white border-pink-600 shadow-[2px_2px_0px_rgba(0,0,0,0.1)] translate-x-[1px] translate-y-[1px]' 
-                                        : 'bg-white text-pink-500 border-pink-300 hover:border-pink-400 shadow-[4px_4px_0px_rgba(255,192,203,0.5)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_rgba(255,192,203,0.5)]'
-                                    }
-                                `}
-                            >
-                                {l}
-                            </button>
-                        ))}
-                    </div>
-                </div>
+          <AsciiBorder title="CUSTOMIZE" className="bg-white/90 backdrop-blur w-full shadow-sm">
 
-                {/* Filters */}
-                <div className="mb-6">
-                    <h3 className="font-mono text-sm font-bold text-pink-600 mb-3 flex items-center gap-2">
-                        <span>[2]</span> FILTER
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                        {(Object.keys(FILTERS) as FilterType[]).map((f) => (
-                             <button
-                                key={f}
-                                onClick={() => setFilter(f)}
-                                className={`
+            {/* Layouts */}
+            <div className="mb-6">
+              <h3 className="font-mono text-sm font-bold text-pink-600 mb-3 flex items-center gap-2">
+                <span>[1]</span> LAYOUT
+              </h3>
+              <div className="grid grid-cols-3 gap-2">
+                {(['strip', 'grid', 'film'] as LayoutType[]).map((l) => (
+                  <button
+                    key={l}
+                    onClick={() => setLayout(l)}
+                    className={`
+                                    py-2 px-1 text-xs md:text-sm font-bold border-2 transition-all uppercase
+                                    ${layout === l
+                        ? 'bg-pink-500 text-white border-pink-600 shadow-[2px_2px_0px_rgba(0,0,0,0.1)] translate-x-[1px] translate-y-[1px]'
+                        : 'bg-white text-pink-500 border-pink-300 hover:border-pink-400 shadow-[4px_4px_0px_rgba(255,192,203,0.5)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_rgba(255,192,203,0.5)]'
+                      }
+                                `}
+                  >
+                    {l}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Filters */}
+            <div className="mb-6">
+              <h3 className="font-mono text-sm font-bold text-pink-600 mb-3 flex items-center gap-2">
+                <span>[2]</span> FILTER
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {(Object.keys(FILTERS) as FilterType[]).map((f) => (
+                  <button
+                    key={f}
+                    onClick={() => setFilter(f)}
+                    className={`
                                     px-3 py-1 text-xs font-bold border-2 rounded-full transition-colors
                                     ${filter === f
-                                        ? 'bg-pink-500 text-white border-pink-600'
-                                        : 'bg-transparent text-pink-500 border-pink-300 hover:bg-pink-50'
-                                    }
+                        ? 'bg-pink-500 text-white border-pink-600'
+                        : 'bg-transparent text-pink-500 border-pink-300 hover:bg-pink-50'
+                      }
                                 `}
-                             >
-                                {FILTERS[f].label}
-                             </button>
-                        ))}
-                    </div>
-                </div>
+                  >
+                    {FILTERS[f].label}
+                  </button>
+                ))}
+              </div>
+            </div>
 
-                {/* Colors */}
-                <div className="mb-6">
-                    <h3 className="font-mono text-sm font-bold text-pink-600 mb-3 flex items-center gap-2">
-                        <span>[3]</span> THEME
-                    </h3>
-                    <div className="flex gap-3">
-                        {(Object.keys(THEMES) as ThemeType[]).map((t) => (
-                            <button
-                                key={t}
-                                onClick={() => setTheme(t)}
-                                className={`
+            {/* Colors */}
+            <div className="mb-6">
+              <h3 className="font-mono text-sm font-bold text-pink-600 mb-3 flex items-center gap-2">
+                <span>[3]</span> THEME
+              </h3>
+              <div className="flex gap-3">
+                {(Object.keys(THEMES) as ThemeType[]).map((t) => (
+                  <button
+                    key={t}
+                    onClick={() => setTheme(t)}
+                    className={`
                                     w-10 h-10 rounded-full border-2 flex items-center justify-center shadow-sm transition-transform hover:scale-110
                                     ${theme === t ? 'ring-2 ring-offset-2 ring-pink-400 border-transparent' : 'border-gray-200'}
                                 `}
-                                style={{ backgroundColor: THEMES[t].bg }}
-                                title={THEMES[t].label}
-                            >
-                                {theme === t && <span className="text-xs font-bold" style={{ color: THEMES[t].text }}>✓</span>}
-                            </button>
-                        ))}
-                    </div>
-                </div>
+                    style={{ backgroundColor: THEMES[t].bg }}
+                    title={THEMES[t].label}
+                  >
+                    {theme === t && <span className="text-xs font-bold" style={{ color: THEMES[t].text }}>✓</span>}
+                  </button>
+                ))}
+              </div>
+            </div>
 
-                <hr className="border-dashed border-pink-200 my-4" />
+            <hr className="border-dashed border-pink-200 my-4" />
 
-                {/* Actions */}
-                <div className="flex flex-col gap-3">
-                    <AsciiButton onClick={handleDownload} className="w-full justify-center">
-                        [ DOWNLOAD PNG ]
-                    </AsciiButton>
-                    <button 
-                        onClick={onRestart}
-                        className="text-xs text-pink-400 hover:text-pink-600 underline font-mono text-center mt-2"
-                    >
-                        &lt; Start Over (Delete Photos)
-                    </button>
-                </div>
+            {/* Actions */}
+            <div className="flex flex-col gap-3">
+              <AsciiButton onClick={handleDownload} className="w-full justify-center">
+                [ DOWNLOAD PNG ]
+              </AsciiButton>
+              <button
+                onClick={onRestart}
+                className="text-xs text-pink-400 hover:text-pink-600 underline font-mono text-center mt-2"
+              >
+                &lt; Start Over (Delete Photos)
+              </button>
+            </div>
 
-            </AsciiBorder>
+          </AsciiBorder>
         </div>
       </div>
     </div>
